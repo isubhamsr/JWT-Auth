@@ -1,5 +1,8 @@
 const mysql = require("./../dbCon")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const dotenv = require("dotenv")
+dotenv.config()
 
 let controller = {}
 
@@ -82,7 +85,9 @@ controller.signin = (req, res) => {
 
                     } else {
                         console.log("Redirect to Wellcome page");
-
+                        const token = jwt.sign({id : email}, process.env.secret_key)
+                        console.log(token);
+                        
                         res.redirect("/main")
                     }
                 }
