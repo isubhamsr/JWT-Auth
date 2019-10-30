@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const varifyToken = require("./../Middleware/verifyToken")
 
 router.get("/",(req,res)=>{
     res.render("index")
@@ -12,6 +13,10 @@ router.get("/signin",(req,res)=>{
 router.get("/main",(req,res)=>{
     res.render("sum")
 })
+router.get("/ve",varifyToken.verify ,(req,res)=>{
+    res.json({name : "Subham", dep : "CSE"})
+})
+
 
 
 module.exports = router

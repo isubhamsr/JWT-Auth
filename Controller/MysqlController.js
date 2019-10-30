@@ -61,7 +61,7 @@ controller.signup = (req, res) => {
 }
 
 // Signin
-controller.signin = (req, res) => {
+controller.signin =  (req, res) => {
     try {
         // console.log(req.body);
 
@@ -87,8 +87,9 @@ controller.signin = (req, res) => {
                         console.log("Redirect to Wellcome page");
                         const token = jwt.sign({id : email}, process.env.secret_key)
                         console.log(token);
+                        res.header('auth_token',token).send(token);
+                        // res.redirect("/main")
                         
-                        res.redirect("/main")
                     }
                 }
             })
