@@ -28,10 +28,16 @@
         <br>
         <br>
         <button onclick="fire()" class="waves-effect waves-light btn-large">Enter</button>
-        
+
     </center>
 
 </body>
+<script>
+    const isChack = localStorage.getItem('token')
+    if (!isChack) {
+        window.location.replace("/signin");
+    }
+</script>
 <script src="main.js"></script>
 
 </html>
