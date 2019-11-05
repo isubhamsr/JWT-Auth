@@ -66,13 +66,18 @@ controller.signin =  (req, res) => {
         // console.log(req.body);
 
         const { email, pass } = req.body
+        console.log(email);
+        console.log(pass);
         if (email === "undefined" && pass === "undefined") {
             res.redirect("/signin")
         } else {
-            const sql = `select password from user where email = '${email}'`;
+            const sql = `select first_name, last_name, password from user where email = '${email}'`;
             mysql.query(sql, (err, result) => {
                 if (result.length === "undefine") {
-                    res.send("Please Enter Password")
+                    res.status(400).json({
+                        err : true, 
+                        message : "Please enter password"
+                    })
                     console.log("Please Enter Password");
 
                 } else {
@@ -80,15 +85,27 @@ controller.signin =  (req, res) => {
 
                     const isChack = bcrypt.compareSync(pass, result[0].password);
                     if (!isChack) {
-                        res.send("Worng Password")
+                        res.status(400).json({
+                            err : true,
+                            message : "Worng Password" 
+                        })
+                        // res.send("Worng Password")
                         console.log("Worng Password");
 
                     } else {
                         console.log("Redirect to Wellcome page");
-                        const token = jwt.sign({id : email}, process.env.secret_key)
+                        const token = jwt.sign({
+                                                first_name : result[0].first_name,
+                                                last_name : result[0].last_name,
+                                                email : email
+                                                }, process.env.secret_key)
                         console.log(token);
-                        res.header('auth_token',token).send(token);
-                        // res.redirect("/main")
+                        res.status(200).json({
+                            err : false,
+                            token : token
+                        })
+                        // res.header('auth_token',token).send(token);
+                        //  res.redirect("/main",{data})
                         
                     }
                 }
