@@ -71,7 +71,7 @@ controller.signin =  (req, res) => {
         if (email === "undefined" && pass === "undefined") {
             res.redirect("/signin")
         } else {
-            const sql = `select password from user where email = '${email}'`;
+            const sql = `select first_name, last_name, password from user where email = '${email}'`;
             mysql.query(sql, (err, result) => {
                 if (result.length === "undefine") {
                     res.status(400).json({
@@ -94,7 +94,11 @@ controller.signin =  (req, res) => {
 
                     } else {
                         console.log("Redirect to Wellcome page");
-                        const token = jwt.sign({id : email}, process.env.secret_key)
+                        const token = jwt.sign({
+                                                first_name : result[0].first_name,
+                                                last_name : result[0].last_name,
+                                                email : email
+                                                }, process.env.secret_key)
                         console.log(token);
                         res.status(200).json({
                             err : false,

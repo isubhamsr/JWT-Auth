@@ -25,3 +25,9 @@ fire = () => {
 
     
 }
+logout = () => {
+    localStorage.removeItem("token");
+    window.location.replace("/signin");
+    console.log("Delete click");
+    
+}
