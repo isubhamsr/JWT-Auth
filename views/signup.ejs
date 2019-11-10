@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <title>Sign up page</title>
+
+    <link rel="stylesheet" href="stylesheets/signup_style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" </head> <body>
+
+    <div class="totalbox">
+
+        <div class="signup">
+            <div class="image"> <img src="images/signupIcon.png" height=80 width=80>
+            </div>
+            <span>SIGN UP<span>
+        </div>
+        <div class="allbox">
+            <div class="firstname">
+                <Span>First Name</Span><br /><input type="text" required id="fname" name="fname"
+                    placeholder="Enter First Name">
+            </div>
+            <div class="lastname">
+                <Span>Last Name</Span><br /><input type="text" required id="lname" name="lname"
+                    placeholder="Enter Last Name">
+            </div>
+            <div class="emailid">
+                <Span>Email id</Span><br /> <input type="email" required id="email" name="email"
+                    placeholder="Enter Email">
+            </div>
+            <!-- <div class="username">
+                <Span>Username</Span><br/><input type="text" id="userid" name="userid" placeholder="Enter Username">
+        </div> -->
+            <div class="phone">
+                <Span>Mobile no.</Span><br /><input type="text" required id="phone" name="phone"
+                    placeholder="Enter Mobile no.">
+            </div>
+            <div class="password">
+                <Span>Password</Span><br /><input type="password" required id="password" name="password"
+                    placeholder="Enter Password">
+            </div>
+        </div>
+        <div class="gender">
+            <span>Gender : </span>
+            - Male<input name="gender" type="radio" value="male" />
+            Female<input name="gender" type="radio" value="female" />
+            Other<input name="gender" type="radio" value="other" />
+        </div>
+        <div class="submit">
+            <button onclick="signup()">Sign Up</button>
+        </div>
+        <div class="createnew">
+            <span>Already a user? </span><a href="url">Log in</a>
+        </div>
+    </div>
+    </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    <script>
+        function signup() {
+            try {
+                console.log("signup");
+                let data = {
+                    fname: document.getElementById("fname").value,
+                    lname: document.getElementById("lname").value,
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("phone").value,
+                    password: document.getElementById("password").value
+                }
+                console.log(data);
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/signup",
+                    data: data,
+                    success: function (data) {
+                        console.log(data);
+                        window.location.replace("/signin");
+                    },
+                    dataType : "text",
+                    error: function (err) {
+                        console.log("---------ERROR----->")
+
+                        console.log(err.message);
+                    }
+                });
+            } catch (err) {
+                console.log(err.message);
+
+            }
+
+
+        }
+
+
+    </script>
+
+</html>

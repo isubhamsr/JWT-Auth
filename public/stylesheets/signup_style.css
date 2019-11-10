@@ -1,0 +1,191 @@
+body
+{
+    background-color: #eee;
+}
+.totalbox
+{
+    border: 1px solid #0000009d;
+    width: 300px;
+    height: 630px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+   
+}
+.signup
+{
+    font-size: 50px;
+    text-align: center;
+    color: black;
+    font-family: bubu;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: bubu;
+    src: url(fonts/fonts_ChocolateCoveredRaindrops.woff);
+}
+.firstname
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 30px;
+    
+    
+
+
+}
+.firstname input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.lastname
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+.lastname input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.emailid
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+.emailid input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.username
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+.username input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.phone
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+.phone input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.password
+{
+    font-weight: bold;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+.password input
+{
+    background-color: white;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+.gender
+{
+    font-weight: normal;
+    color: black;
+    margin-left: 20px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+
+.submit button
+{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    background:#67E6DC;
+    width:70%;
+    padding:10px;
+    border-radius:20px;
+    border-width: 0;
+    margin-left: 47px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    
+}
+.createnew
+{
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+

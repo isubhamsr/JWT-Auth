@@ -1,0 +1,106 @@
+:root {
+    --main-bg-color-1: #eee;
+    
+}
+
+body
+{
+    background-color: var(--main-bg-color-1);
+
+}
+.totalbox
+{
+    border: 1px solid black;
+    width: 300px;
+    text-align: center;
+    height: 430px;
+    margin: auto;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* {
+    margin-top: 0px;
+} */
+.signin
+{
+    font-size: 50px;
+    text-align: center;
+    color: black;
+    font-family: bubu;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: bubu;
+    src: url(fonts/fonts_ChocolateCoveredRaindrops.woff);
+}
+
+.userid input
+{
+    background-color: white;
+    padding: 5px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    width: 70%;
+    border-width: 0;
+    border-bottom: 1px solid black;
+    
+    
+    
+}
+.password input
+{
+    background-color: white;
+    padding: 5px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    width: 70%;
+    border-width: 0;
+    border-bottom: 1px solid black;
+}
+.checkbox
+{
+    margin-left: -115px;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+.submit button
+{
+    color:black;
+    
+    background:#67E6DC;
+    width:70%;
+    padding:10px;
+    border-radius:20px;
+    border-width: 0;
+    margin: auto;;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    
+    
+    
+}
+.forgetpassword
+{
+    margin-top: -10px;
+   
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px; 
+    text-align: center;
+    margin-top: 5px;
+}
+.createnew
+{
+    margin-top: 25px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-top: 20px;
+}
