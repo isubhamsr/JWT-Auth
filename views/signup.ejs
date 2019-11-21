@@ -42,6 +42,7 @@
                     placeholder="Enter Password">
             </div>
         </div>
+        <a href="http://"></a>
         <div class="gender">
             <span>Gender : </span>
             - Male<input name="gender" type="radio" value="male" />
@@ -56,47 +57,58 @@
         </div>
     </div>
     </div>
+    
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("ready!");
+            console.log("1st");
+            const isChack = localStorage.getItem('token')
+            if (isChack) {
+                window.location.replace("/signin");
+            }
+        });
+    </script>
     
     <script>
         function signup() {
             try {
                 console.log("signup");
                 let data = {
-                    fname: document.getElementById("fname").value,
-                    lname: document.getElementById("lname").value,
+                    first_name: document.getElementById("fname").value,
+                    last_name: document.getElementById("lname").value,
                     email: document.getElementById("email").value,
                     phone: document.getElementById("phone").value,
                     password: document.getElementById("password").value
                 }
                 console.log(data);
-
-
                 $.ajax({
                     type: "POST",
-                    url: "/api/signup",
+                    url: "/api/v1/signup",
                     data: data,
                     success: function (data) {
                         console.log(data);
-                        window.location.replace("/signin");
+                        
+                        // console.log(data.token);
+                        // console.log("data 1 token");
+                        
+                        const tokenData = JSON.parse(data)
+                        console.log(tokenData);
+                        console.log(tokenData.token);
+                        window.location.replace("/verify");
+                        localStorage.setItem("token",tokenData.token)
                     },
                     dataType : "text",
                     error: function (err) {
                         console.log("---------ERROR----->")
-
                         console.log(err.message);
                     }
                 });
             } catch (err) {
                 console.log(err.message);
-
             }
-
-
         }
-
-
     </script>
-
 </html>

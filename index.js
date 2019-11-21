@@ -14,13 +14,16 @@ app.set("view engine", "ejs")
 app.use(express.json())
 app.use(express.urlencoded())
 
+// import routes
 const webRoute = require("./routes/web")
 const apiRoute = require("./routes/api")
+
 // set routes
+
 // api route
-app.use("/api",apiRoute)
+app.use(process.env.APP_VERSION, apiRoute)
+
 // web route
 app.use(webRoute)
-
 
 app.listen(process.env.HTTP_PORT, ()=> console.log(`server running on ${process.env.HTTP_PORT}`))

@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign in page</title>
-    <link rel="stylesheet" href="stylesheets/signin_style.css" />
+    <link rel="stylesheet" href="stylesheets/signin_style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
 
     <div class="totalbox">
-        <div class="signin">
-            <div class="image">
-                <img src="images/signin.png" height=80 width=80>
+            <div class="signin">
+                    <div class="image"> 
+                    <img src="images/signin.png" height=80 width=80>
+                    </div>
+                     <span>LOG IN<span>
             </div>
-            <span>LOG IN<span>
+            <div class="userid">
+                <i style="font-size:25px"class="fa fa-user"></i><input type="text" required id="email" name="email" placeholder="Username or Email id"/>
+            </div>
+            <div class="password">
+                <i style="font-size:25px"class="fa fa-lock"></i><input type="password" required id="password" name="password" placeholder="password"/>
+            </div>
+            <div class="checkbox">
+                    <input type="checkbox" > Remember password
+            </div>
+            <div class="submit">
+                    <button type="submit">Log in</button>
+            </div>
+            <div class="forgetpassword">
+                    <a href="url">Forget Password</a>
+            </div>
+            <div class="createnew">
+                <span>Don't have an account? </span><a href="url">Create now</a>
         </div>
-        <div class="userid">
-            <i style="font-size:25px" class="fa fa-user"></i><input type="text" required id="email" name="email"
-                placeholder="Username or Email id" />
-        </div>
-        <div class="password">
-            <i style="font-size:25px" class="fa fa-lock"></i><input type="password" required id="password"
-                name="password" placeholder="password" />
-        </div>
-        <div class="checkbox">
-            <input type="checkbox"> Remember password
-        </div>
-        <div class="submit">
-            <button onclick="signin()">Log in</button>
-        </div>
-        <div class="forgetpassword">
-            <a href="url">Forget Password</a>
-        </div>
-        <div class="createnew">
-            <span>Don't have an account? </span><a href="url">Create now</a>
-        </div>
+            
+
+
     </div>
-
+    
 </body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $(document).ready(function () {
         console.log("ready!");
@@ -85,5 +81,4 @@
         });
     }
 </script>
-
 </html>

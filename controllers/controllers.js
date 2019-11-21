@@ -1,6 +1,7 @@
-const mysql = require("./../config/dbConfig")
+const mysql = require("../config/config")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const mailer = require("../lib/email")
 
 
 let controller = {}
@@ -11,30 +12,30 @@ controller.signup = (req, res) => {
         // assign the values from req.body
         /*{
             req.body : {
-                "fname" : "Subham",
-                "lname" : "Roy",
+                "first_name" : "Subham",
+                "last_name" : "Roy",
                 "email" : "subhaor@gmail.com",
                 "phone" : "121344561",
                 "password" : "nopass"
             }
         }*/
 
-        const { fname, lname, email, phone, password } = req.body;
-        
+        const { first_name, last_name, email, phone, password } = req.body;
+
         // if anyone dont give the password and email in input the sent the user to signup page
         if (password === undefined && email === undefined) {
             console.log("DATA IS EMPTY !!!")
-            console.log({ fname, lname, email, phone, password });
-            res.status(400).json({message:"internal server error ok!"})
+            console.log({ first_name, last_name, email, phone, password });
+            res.status(400).json({ message: "internal server error ok!" })
             //res.redirect("/signup")
         } else {
             // then we fetch the email for checking if email alrady exists or not
             const sl = `select email from user where email = '${email}'`;
             mysql.query(sl, (err, result) => {
-                if(err) {
+                if (err) {
                     res.status(500).json({
-                        err : true,
-                        message : err.message
+                        err: true,
+                        message: err.message
                     })
                 }
                 if (result.length != 0) {
@@ -47,8 +48,8 @@ controller.signup = (req, res) => {
                     // Sp structure
                     /*{
                         "name" : {
-                            "first" : "Subham",
-                            "last" : "Roy"
+                            "first_name" : "Subham",
+                            "last_name" : "Roy"
                         },
                         "email" : "shubham@gmail.com",
                         "phone" : "12345",
@@ -58,29 +59,63 @@ controller.signup = (req, res) => {
                     const payload = {
                         name: {}
                     }
-                    payload.name.first = fname
-                    payload.name.last = lname
+                    payload.name.first_name = first_name
+                    payload.name.last_name = last_name
                     payload.email = email
                     payload.phone = phone
-                    try{
-                    payload.password = bcrypt.hashSync(password, 10); // save the incrypted password
-                    }catch(err){
-                        console.log("=========>",err.message)
+                    try {
+                        payload.password = bcrypt.hashSync(password, 10); // save the incrypted password
+                    } catch (err) {
+                        console.log("=========>", err.message)
                     }
 
                     // call the SP
                     const sql = `call Signup('${JSON.stringify(payload)}')`
-                        console.log(payload);
-                        
+                    console.log(payload);
+
                     mysql.query(sql, (err, result) => {
                         if (err) {
-                            console.log("sql cb =====> ",err.message);
+                            console.log("sql cb =====> ", err.message);
                         } else {
+                            const token = jwt.sign({
+                                first_name: first_name,
+                                last_name: last_name,
+                                email: email,
+                                phone: phone
+                            }, process.env.SUPER_SECRET_KEY)
+
+                            const mainOptions = {
+                                from: '"Subham" shubhamroy12345@gmail.com',
+                                to: "shubham.roy021@gmail.com",
+                                subject: 'Email Verification',
+                                html: `Hello, <strong>${first_name}</strong> <a href="http://localhost:3000/api/v1/verify?token=${token}">Click Here to Verify Your Account</a>`
+                            }
+                            
+                            mailer.transporter.sendMail(mainOptions, function (err, info) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    /*
+                                    const token = jwt.sign({
+                                        first_name: first_name,
+                                        last_name: last_name,
+                                        email: email,
+                                        phone: phone
+                                    }, process.env.SUPER_SECRET_KEY) */
+                                    console.log('Message sent: ' + info.response);
+                                    res.status(200).json({
+                                        err: false,
+                                        message: "Signup Successfull",
+                                        token: token
+                                    })
+                                }
+                            })
                             // after succesfully signup, sent the status code 200
-                            res.status(200).json({
+                            /* res.status(200).json({
                                 err: false,
                                 message: "Signup Successfull"
                             })
+                            */
                         }
                     })
 
@@ -108,7 +143,7 @@ controller.signin = (req, res) => {
          */
 
         const { email, password } = req.body;
-        
+
         // if anyone dont give the password and email in input the sent the user to signin page
         if (email === "undefined" && password === "undefined") {
             res.redirect("/signin")
@@ -117,7 +152,7 @@ controller.signin = (req, res) => {
             // fetch the full details of user
             const sql = `select first_name,last_name,email,phone,password from user where email = '${email}'`;
             mysql.query(sql, (err, result) => {
-                
+
                 // if result length is 0 then, this is a wrong email
                 if (result.length === 0) {
                     res.status(400).json({
@@ -141,7 +176,7 @@ controller.signin = (req, res) => {
                             last_name: result[0].last_name,
                             email: result[0].email,
                             phone: result[0].phone
-                        }, process.env.SECRET_KEY)
+                        }, process.env.SUPER_SECRET_KEY)
                         // sent the status code 200 with token
                         res.status(200).json({
                             err: false,
@@ -155,6 +190,51 @@ controller.signin = (req, res) => {
     } catch (err) {
         console.log(err.message);
     }
+}
+
+
+controller.emailVerify = (req,res)=>{
+    const {token} = req.query
+    // console.log(token);
+
+    const decoded = jwt.decode(token);
+    console.log(decoded.email);
+    const user_email = decoded.email
+
+    const sql = `select user_id, email from user where email= '${user_email}'`;
+    mysql.query(sql,(err, result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            if(result[0].email === user_email){
+                const sq = `UPDATE user
+                SET status = 'active'
+                WHERE user_id = '${result[0].user_id}'`
+
+                mysql.query(sq,(err,result1)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        res.redirect("/signin")
+                    }
+                    
+                })
+
+                
+            }else{
+                res.redirect("/signup")
+            }
+        }
+    })
+
+
+    
+
+//     var decoded = jwt.verify(token, 'shhhhh');
+// console.log(decoded) // bar
+    
+    // const decodeToken = JSON.parse(atob(token.split('.')[1]));
+    
 }
 
 module.exports = controller;
