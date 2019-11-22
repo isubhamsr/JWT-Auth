@@ -11,4 +11,8 @@ Router.get("/verify", (req,res)=>{
     res.render("verify")
 })
 
+Router.get("/sum", (req,res)=>{
+    res.render("sum")
+})
+
 module.exports = Router;

@@ -86,7 +86,7 @@ controller.signup = (req, res) => {
 
                             const mainOptions = {
                                 from: '"Subham" shubhamroy12345@gmail.com',
-                                to: "shubham.roy021@gmail.com",
+                                to: email,
                                 subject: 'Email Verification',
                                 html: `Hello, <strong>${first_name}</strong> <a href="http://localhost:3000/api/v1/verify?token=${token}">Click Here to Verify Your Account</a>`
                             }
