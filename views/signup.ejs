@@ -83,27 +83,27 @@
                     phone: document.getElementById("phone").value,
                     password: document.getElementById("password").value
                 }
-                console.log(data);
+                
                 $.ajax({
                     type: "POST",
                     url: "/api/v1/signup",
                     data: data,
                     success: function (data) {
+                        console.log("Succcess ==== >");
                         console.log(data);
-                        
                         // console.log(data.token);
                         // console.log("data 1 token");
                         
-                        const tokenData = JSON.parse(data)
-                        console.log(tokenData);
-                        console.log(tokenData.token);
+                        // const tokenData = JSON.parse(data)
+                        // console.log(tokenData);
+                        // console.log(tokenData.token);
                         window.location.replace("/verify");
-                        localStorage.setItem("token",tokenData.token)
+                        // localStorage.setItem("token",tokenData.token)
                     },
                     dataType : "text",
                     error: function (err) {
                         console.log("---------ERROR----->")
-                        console.log(err.message);
+                        console.log(err.responseText);
                     }
                 });
             } catch (err) {

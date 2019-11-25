@@ -71,8 +71,9 @@
             success: function (data) {
                 console.log("---------OK----->")
                 console.log(data);
-                window.location.replace("/sum");
                 localStorage.setItem("token", data.token)
+                window.location.replace("/sum");
+                
             },
             error: function (err) {
                 console.log("---------ERROR----->")
